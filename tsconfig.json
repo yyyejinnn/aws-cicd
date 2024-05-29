@@ -8,5 +8,6 @@
     "strict": true
   },
 
-  "include": ["app/**/*.ts"]
+  "include": ["app/**/*.ts"],
+  "exclude": ["**/*.test.ts"]
 }
