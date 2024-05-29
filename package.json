@@ -1,0 +1,21 @@
+{
+  "name": "aws-cicd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "prestart": "npm run build",
+    "start": "node build/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon build/index.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.2"
+  }
+}
