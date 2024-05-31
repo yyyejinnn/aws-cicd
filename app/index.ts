@@ -21,6 +21,8 @@ if (!REDIS_URL) {
 
 // server
 const startServer = async () => {
+  console.log(`trying to start server`);
+
   const client = redis.createClient({ url: REDIS_URL });
   await client.connect();
 
