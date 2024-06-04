@@ -25,10 +25,12 @@ jobs:
           ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_PUBLIC_IP}} "
           cd aws-cicd
 
-          git pull origin main || exit 1
+          git pull origin main 
+          npm install
+          npm run build
 
-          sudo -s || exit 1
-          pkill node || exit 1
-          npm run start & npx wait-on http://localhost || exit 1
+          sudo -s
+          pkill node
+          npm run start & npx wait-on http://localhost
           exit
           "
