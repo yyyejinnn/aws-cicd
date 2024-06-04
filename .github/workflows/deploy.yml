@@ -25,8 +25,10 @@ jobs:
           ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_PUBLIC_IP}} "
           cd aws-cicd
 
+          node -v
+
           git pull origin main || exit 1
-          npm ci || exit 1
+          npm install || exit 1
           npm run build || exit 1
 
           sudo -s || exit 1
