@@ -9,6 +9,14 @@ jobs:
   deploy:
     runs-on: ubuntu-22.04
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Node.js setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
