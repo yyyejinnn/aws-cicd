@@ -19,6 +19,7 @@ jobs:
         run: |
           echo "${{secrets.SSH_KNOWN_HOSTS}}" >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
+          node -v
 
       - name: SSH and deploy
         run: |
