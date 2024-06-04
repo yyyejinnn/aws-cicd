@@ -9,6 +9,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Node.js setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
@@ -24,10 +29,10 @@ jobs:
         run: |
           ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_PUBLIC_IP}} "
           cd aws-cicd
-          sudo -s || exit 1
           git pull origin main || exit 1
           npm install || exit 1
           npm run build || exit 1
+          sudo -s || exit 1
           pkill node || exit 1
           npm run start & npx wait-on http://localhost || exit 1
           exit
