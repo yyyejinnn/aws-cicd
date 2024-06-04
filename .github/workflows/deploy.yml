@@ -12,7 +12,7 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_SECRET_KEY}}" > ~/.ssh/id_rsa
+          echo "${{secrets.SSH_SECRET_KEY}}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
       - name: Set up known hosts
@@ -24,6 +24,12 @@ jobs:
         run: |
           ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_PUBLIC_IP}} "
           cd aws-cicd
+
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+          export NVM_DIR=\"$HOME/.nvm\"
+          [ -s \"$NVM_DIR/nvm.sh\" ] && \. \"$NVM_DIR/nvm.sh\"
+          nvm install 16
+          nvm use 16
 
           node -v
 
