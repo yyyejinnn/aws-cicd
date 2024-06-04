@@ -9,11 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Node.js setup
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh/
@@ -29,6 +24,9 @@ jobs:
         run: |
           ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_PUBLIC_IP}} "
           cd aws-cicd
+
+          nvm install 16
+          nvm use 16
 
           git pull origin main || exit 1
           npm install || exit 1
