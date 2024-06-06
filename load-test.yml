@@ -1,0 +1,10 @@
+config:
+  target: http://localhost:4000
+  phases:
+    - duration: 5 # 5초동안, 1초마다 시나리오 요청 보냄
+      arrivalRate: 100 # 한 번에 100개의 요청
+
+scenarios:
+  - flow:
+      - get:
+          url: '/messages'

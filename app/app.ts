@@ -27,5 +27,19 @@ export const createApp = (client: RedisClient) => {
     res.status(200).send(messages);
   });
 
+  /** 부하 테스트를 위한 경로 */
+  app.get('/fibonacci/:n', async (req, res) => {
+    const n = parseInt(req.params.n, 10);
+    const result = fibonacci(n);
+
+    return res.send(`Fibonacci(${n}) => ${result}`);
+  });
+
   return app;
 };
+
+function fibonacci(n: number): number {
+  if (n <= 1) return n;
+
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
