@@ -29,6 +29,8 @@ export const createApp = (client: RedisClient) => {
 
   /** 부하 테스트를 위한 경로 */
   app.get('/fibonacci/:n', async (req, res) => {
+    console.log(process.env.pm_id);
+
     const n = parseInt(req.params.n, 10);
     const result = fibonacci(n);
 

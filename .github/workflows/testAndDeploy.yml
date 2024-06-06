@@ -40,7 +40,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          
+
       - name: Set up SSH
         run: |
           node -v
@@ -56,15 +56,13 @@ jobs:
       - name: SSH and deploy
         run: |
           ssh -i ~/.ssh/id_rsa ${{secrets.SSH_USERNAME}}@${{secrets.SSH_PUBLIC_IP}} "
-          node -v
-          cd aws-cicd
 
-          git pull origin main || exit 1
-          npm install || exit 1
-          npm run build || exit 1
+            sudo -s
+            cd aws-cicd
 
-          sudo -s || exit 1
-          pkill node || exit 1
-          npm run start & npx wait-on http://localhost || exit 1
-          exit
+            git pull || exit 1
+            npm install || exit 1
+            npm run build || exit 1
+            pm2 reload
+            exit
           "
