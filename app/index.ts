@@ -27,12 +27,26 @@ const startServer = async () => {
   await client.connect();
 
   const app = createApp(client);
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`App listening at port ${PORT}!`);
   });
+
+  return server;
 };
 
-startServer();
+const server = startServer();
+
+const gracefulShutdown = async () => {
+  const _server = await server;
+  
+  _server.close(() => {
+    console.log('gracful shutdown!');
+    process.exit();
+  });
+}
+
+process.on('SIGTERM', gracefulShutdown);
+process.on('SIGTINT', gracefulShutdown);
 
 /**
  * redis 백그라운드 실행

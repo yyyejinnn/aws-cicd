@@ -1,0 +1,17 @@
+# $ docker run -it -p 4000:4000 --env-file .env -v $(pwd)/app:/usr/src/my-app/app [images-name]
+
+FROM node:18 as build
+
+WORKDIR /usr/src/my-app
+
+RUN npm install -g nodemon
+
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
+CMD [ "npm", "run", "dev" ]

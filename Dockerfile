@@ -24,4 +24,6 @@ COPY --from=build ./usr/src/my-app/package-lock.json ./package-lock.json
 
 RUN npm install --only=production
 
-CMD [ "npm", "run", "start" ]
+# CMD [ "npm", "run", "start" ] -> npm이 부모프로세스가 돼서 process.on() 안먹힘
+
+CMD [ "node", "build/index.js" ]
