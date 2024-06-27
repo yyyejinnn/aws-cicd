@@ -1,0 +1,26 @@
+version: "3"
+
+# $ docker run -it -p 4000:4000 --env-file .env -v $(pwd)/app:/usr/src/my-app/app [images-name]
+services:
+  web:
+    build: 
+      context: . # docker run . 할 때 dot
+      dockerfile: Dockerfile.dev  # 이미지 파일
+    volumes:
+      - ./app:/usr/src/my-app/app    # -v $(pwd)/app:/usr/src/my-app/app
+    ports:
+      - "4000:4000"    # -p 4000:4000
+
+    # env_file:
+    #  - .env          # --env-file .env
+
+    # 바로 환경변수 설정해줄 수도 있음! (개발용)
+    environment:
+      - REDIS_URL=redis://redis_server:6379  # 알아서 host.docker.internal 리다이렉트
+      - PORT=4000
+    depends_on:
+      - redis_server
+
+  redis_server:
+    image: "redis:alpine"
+    
