@@ -1,6 +1,6 @@
 # Build stage
 
-FROM node:18 as build
+FROM --platform=linux/amd64 node:18 as build
 
 WORKDIR /usr/src/my-app
 
@@ -14,7 +14,7 @@ RUN npm run build
 
 # Production stage
 
-FROM node:18 as prod
+FROM --platform=linux/amd64 node:18 as prod
 
 WORKDIR /usr/src/my-app
 
