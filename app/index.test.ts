@@ -7,10 +7,10 @@ let app: App;
 let client: RedisClient;
 
 // 테스트용 redis url -> 비밀번호, 포트 변경
-const REDIS_URL = 'redis://default:test_env@localhost:6380';
+// const REDIS_URL = 'redis://default:test_env@localhost:6380';
 
 beforeAll(async () => {
-  client = redis.createClient({ url: REDIS_URL });
+  client = redis.createClient({ url: process.env.TEST_REDIS_URL });
   await client.connect();
 
   app = createApp(client);

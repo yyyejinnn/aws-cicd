@@ -1,0 +1,17 @@
+version: "3"
+
+# $ docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      - TEST_REDIS_URL=redis://redis_server:6379
+    command: npm run test:ci
+    depends_on:
+      - redis_server
+
+  redis_server:
+    image: "redis:alpine"
+    
