@@ -3,7 +3,7 @@
 
 <br/><br/>
 
-## 배운 
+## 배운 내용
 * AWS Lightsail로 빠르고 간단하기 서버 배포하기 (+SSH, HTTPS)
 * 고가용성 - PM2 Cluster, Loadbalancing, 가용영역(AZ)
 * 컨테이너 기술 Docker 알아보기
